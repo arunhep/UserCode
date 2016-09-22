@@ -1,0 +1,20 @@
+{
+  "proc":[
+    {
+      "tag":"data",
+      "keys":["2l2v_mcbased", "2l2v_datadriven", "2l2v_datadrivenplot"],
+      "isdata":true,
+      "color":1,
+      "fill":0,
+      "marker":20,
+      "msize":0.7,
+      "data":[
+
+           { "dtag":"Data13TeV_SingleElectron2016E"       ,  "xsec":1.0         , "br":[ 1.0 ]      , "dset":["/SingleElectron/Run2016E-PromptReco-v2/MINIAOD"]   ,  "lumiMask":"$CMSSW_BASE/src/UserCode/llvv_fwk/test/hzz2l2v/Cert_271036-280385_13TeV_PromptReco_Collisions16_JSON_NoL1T.txt"   },
+	   { "dtag":"Data13TeV_SingleElectron2016F"       ,  "xsec":1.0         , "br":[ 1.0 ]      , "dset":["/SingleElectron/Run2016F-PromptReco-v1/MINIAOD"]   ,  "lumiMask":"$CMSSW_BASE/src/UserCode/llvv_fwk/test/hzz2l2v/Cert_271036-280385_13TeV_PromptReco_Collisions16_JSON_NoL1T.txt"   },
+	   { "dtag":"Data13TeV_SingleElectron2016G"       ,  "xsec":1.0         , "br":[ 1.0 ]      , "dset":["/SingleElectron/Run2016G-PromptReco-v1/MINIAOD"]   ,  "lumiMask":"$CMSSW_BASE/src/UserCode/llvv_fwk/test/hzz2l2v/Cert_271036-280385_13TeV_PromptReco_Collisions16_JSON_NoL1T.txt"   }
+      ]
+    }
+  ]
+}
+

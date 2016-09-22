@@ -1,0 +1,20 @@
+<use name="lhapdf"/>
+<use name="roottmva"/>
+<use name="roofit"/>
+<use name="roostats"/>
+<use name="PhysicsTools/FWLite"/>
+<use name="UserCode/llvv_fwk"/>
+<use name="TauAnalysis/SVfitStandalone"/>
+<use name="RecoJets/JetProducers"/>
+<use name="HiggsAnalysis/CombinedLimit"/>
+<use name="RecoEgamma/ElectronIdentification"/>
+<use name="EgammaAnalysis/ElectronTools"/>
+
+<environment>
+  <bin name="runEfficencyMiniAODExample_HWW"  file="runEfficencyMiniAODExample_HWW.cc"></bin>
+
+<!--  <bin name="runZHTauTauAnalysis"         file="zhtautau/runZHTauTauAnalysis.cc"></bin>-->
+  <bin name="extractFRWeights"            file="zhtautau/extractFRWeights.cc"></bin>
+</environment>
+
+<flags CXXFLAGS="-g -Wno-sign-compare -Wno-unused-variable -Wno-unused-but-set-variable  -Os"/>
