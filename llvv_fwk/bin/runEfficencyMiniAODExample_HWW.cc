@@ -157,6 +157,8 @@ TString outUrl = runProcess.getParameter<std::string>("outfile");
 TFile *ofile=TFile::Open(outUrl, "recreate");
 TTree *ntuple     = new TTree("ntuple","Efficiency Tree");
 
+double Nvtx;
+double ZMass;
 double tagPT;
 double totalProbePT;
 double passProbePTLeg1;
@@ -193,6 +195,23 @@ double passProbeEtaLeg13;
 double passProbeEtaLeg14;
 double passProbeEtaLeg15;
 double passProbeEtaLeg16;
+double totalProbePhi;
+double passProbePhiLeg1;
+double passProbePhiLeg2;
+double passProbePhiLeg3;
+double passProbePhiLeg4;
+double passProbePhiLeg5;
+double passProbePhiLeg6;
+double passProbePhiLeg7;
+double passProbePhiLeg8;
+double passProbePhiLeg9;
+double passProbePhiLeg10;
+double passProbePhiLeg11;
+double passProbePhiLeg12;
+double passProbePhiLeg13;
+double passProbePhiLeg14;
+double passProbePhiLeg15;
+double passProbePhiLeg16;
 double PUWeight;
 double lumi_weight;
 double counting;
@@ -210,6 +229,8 @@ double passL1EtaIso;
 double passL1EtaER;
 double passL1Eta;
 
+TBranch *b_Nvtx = ntuple->Branch("Nvtx",&Nvtx,"Nvtx/D");
+TBranch *b_ZMass = ntuple->Branch("ZMass",&ZMass,"ZMass/D");
 TBranch *b_tagPT = ntuple->Branch("tagPT",&tagPT,"tagPT/D");
 TBranch *b_tagEta = ntuple->Branch("tagEta",&tagEta,"tagEta/D");
 TBranch *b_totalProbePT = ntuple->Branch("totalProbePT",&totalProbePT,"totalProbePT/D");
@@ -246,6 +267,25 @@ TBranch *b_passProbeEtaLeg13 = ntuple->Branch("passProbeEtaLeg13",&passProbeEtaL
 TBranch *b_passProbeEtaLeg14 = ntuple->Branch("passProbeEtaLeg14",&passProbeEtaLeg14,"passProbeEtaLeg14/D");
 TBranch *b_passProbeEtaLeg15 = ntuple->Branch("passProbeEtaLeg15",&passProbeEtaLeg15,"passProbeEtaLeg15/D");
 TBranch *b_passProbeEtaLeg16 = ntuple->Branch("passProbeEtaLeg16",&passProbeEtaLeg16,"passProbeEtaLeg16/D");
+TBranch *b_passProbePhiLeg1 = ntuple->Branch("passProbePhiLeg1",&passProbePhiLeg1,"passProbePhiLeg1/D");
+TBranch *b_passProbePhiLeg2 = ntuple->Branch("passProbePhiLeg2",&passProbePhiLeg2,"passProbePhiLeg2/D");
+TBranch *b_passProbePhiLeg3 = ntuple->Branch("passProbePhiLeg3",&passProbePhiLeg3,"passProbePhiLeg3/D");
+TBranch *b_passProbePhiLeg4 = ntuple->Branch("passProbePhiLeg4",&passProbePhiLeg4,"passProbePhiLeg4/D");
+TBranch *b_passProbePhiLeg5 = ntuple->Branch("passProbePhiLeg5",&passProbePhiLeg5,"passProbePhiLeg5/D");
+TBranch *b_passProbePhiLeg6 = ntuple->Branch("passProbePhiLeg6",&passProbePhiLeg6,"passProbePhiLeg6/D");
+TBranch *b_passProbePhiLeg7 = ntuple->Branch("passProbePhiLeg7",&passProbePhiLeg7,"passProbePhiLeg7/D");
+TBranch *b_passProbePhiLeg8 = ntuple->Branch("passProbePhiLeg8",&passProbePhiLeg8,"passProbePhiLeg8/D");
+TBranch *b_passProbePhiLeg9 = ntuple->Branch("passProbePhiLeg9",&passProbePhiLeg9,"passProbePhiLeg9/D");
+TBranch *b_passProbePhiLeg10 = ntuple->Branch("passProbePhiLeg10",&passProbePhiLeg10,"passProbePhiLeg10/D");
+TBranch *b_passProbePhiLeg11 = ntuple->Branch("passProbePhiLeg11",&passProbePhiLeg11,"passProbePhiLeg11/D");
+TBranch *b_passProbePhiLeg12 = ntuple->Branch("passProbePhiLeg12",&passProbePhiLeg12,"passProbePhiLeg12/D");
+TBranch *b_passProbePhiLeg13 = ntuple->Branch("passProbePhiLeg13",&passProbePhiLeg13,"passProbePhiLeg13/D");
+TBranch *b_passProbePhiLeg14 = ntuple->Branch("passProbePhiLeg14",&passProbePhiLeg14,"passProbePhiLeg14/D");
+TBranch *b_passProbePhiLeg15 = ntuple->Branch("passProbePhiLeg15",&passProbePhiLeg15,"passProbePhiLeg15/D");
+TBranch *b_passProbePhiLeg16 = ntuple->Branch("passProbePhiLeg16",&passProbePhiLeg16,"passProbePhiLeg16/D");
+TBranch *b_totalProbePhi = ntuple->Branch("totalProbePhi",&totalProbePhi,"totalProbePhi/D");
+
+
 TBranch *b_PUWeight = ntuple->Branch("PUWeight",&PUWeight,"PUWeight/D");
 TBranch *b_lumi_weight = ntuple->Branch("lumi_weight",&lumi_weight,"lumi_weight/D");
 TBranch *b_counting = ntuple->Branch("counting",&counting);
@@ -381,6 +421,8 @@ if(iev%10000==0) {cout <<"Number of events processed =   " << iev << endl;}
 //       bool passOnlyMuon(false);
 //       bool passOnlyEle(false); 
 
+Nvtx = -999;
+ZMass = -999.;
 tagPT = -999.;
 totalProbePT = -999.;
 passProbePTLeg1 = -999.;
@@ -421,6 +463,23 @@ passProbeEtaLeg13 = -999.;
 passProbeEtaLeg14 = -999.;
 passProbeEtaLeg15 = -999.;
 passProbeEtaLeg16 = -999.;
+totalProbePhi = -999.;
+passProbePhiLeg1 = -999.;
+passProbePhiLeg2 = -999.;
+passProbePhiLeg3 = -999.;
+passProbePhiLeg4 = -999.;
+passProbePhiLeg5 = -999.;
+passProbePhiLeg6 = -999.;
+passProbePhiLeg7 = -999.;
+passProbePhiLeg8 = -999.;
+passProbePhiLeg9 = -999.;
+passProbePhiLeg10 = -999.;
+passProbePhiLeg11 = -999.;
+passProbePhiLeg12 = -999.;
+passProbePhiLeg13 = -999.;
+passProbePhiLeg14 = -999.;
+passProbePhiLeg15 = -999.;
+passProbePhiLeg16 = -999.;
 passL1EtaNorm = -999.;
 passL1EtaIso = -999.;
 passL1EtaER = -999.;
@@ -614,7 +673,7 @@ double rho = 0.;
          int first  = rand()%2;
          int second = (first+1)%2;
          
-
+         Nvtx = vtx.size();
          double etaf = selLeptons[first].el.superCluster()->eta();
          double ptf  = selLeptons[first].pt();
          double etas = selLeptons[second].el.superCluster()->eta();         
@@ -637,10 +696,12 @@ double rho = 0.;
         //cout << "detain seed = " << selLeptons[second].el.deltaEtaSeedClusterTrackAtCalo() << endl;
         //cout <<" mising hits = " << selLeptons[second].el.gsfTrack()->hitPattern().numberOfHits(reco::HitPattern::MISSING_INNER_HITS) << endl;
 if(fabs(etas) <= 1.479) {
-         ProbeISO = ((ecalPFIsos-rho*0.165)/pts) < 0.160 && ((hcalPFIsos-rho*0.060)/pts) < 0.120 && (trackIsos/pts) < 0.08 && abs(detaseeds) < 0.004 && misshit < 1 && abs(dphiin) < 0.020;
+//         ProbeISO = ((ecalPFIsos-rho*0.165)/pts) < 0.160 && ((hcalPFIsos-rho*0.060)/pts) < 0.120 && (trackIsos/pts) < 0.08 && abs(detaseeds) < 0.004 && misshit < 1 && abs(dphiin) < 0.020;
+         ProbeISO = ((ecalPFIsos-rho*0.165)/pts) < 0.160 && ((hcalPFIsos-rho*0.060)/pts) < 0.120 && (trackIsos/pts) < 0.08 && abs(detaseeds) < 0.004 && abs(dphiin) < 0.020;         
 }
 else if(fabs(etas) > 1.479 && fabs(etas) < 2.5) {
-         ProbeISO = ((ecalPFIsos-rho*0.132)/pts) < 0.120 && ((hcalPFIsos-rho*0.131)/pts) < 0.120 && (trackIsos/pts) < 0.08 && misshit < 1 && abs(chi2) < 3;
+ //        ProbeISO = ((ecalPFIsos-rho*0.132)/pts) < 0.120 && ((hcalPFIsos-rho*0.131)/pts) < 0.120 && (trackIsos/pts) < 0.08 && misshit < 1 && abs(chi2) < 3;
+          ProbeISO = ((ecalPFIsos-rho*0.132)/pts) < 0.120 && ((hcalPFIsos-rho*0.131)/pts) < 0.120 && (trackIsos/pts) < 0.08 && abs(chi2) < 3;
 }
 
 //	 TagISO = ecalPFIsof < 0.45 && hcalPFIsof < 0.25 && trackIsof < 0.2;
@@ -668,18 +729,13 @@ else if(fabs(etas) > 1.479 && fabs(etas) < 2.5) {
              std::string leg11Filter("hltEle35WPLooseGsfTrackIsoFilter"); //HLT_Ele35_WPLoose_Gsf_v*
              std::string leg12Filter("hltEle27erWPLooseGsfTrackIsoFilter"); //HLT_Ele27_eta2p1_WPLoose_Gsf_v*
              std::string leg14Filter("hltEle45WPLooseGsfTrackIsoFilter"); //HLT_Ele45_WPLoose_Gsf_v*
-     //        std::string leg15Filter("hltMu23TrkIsoVVLEle8CaloIdLTrackIdLIsoVLElectronlegTrackIsoFilter"); //Ele8 part of HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL_v4
              std::string leg15Filter("hltEle27WPTightGsfTrackIsoFilter"); //HLT_Ele27_WPTight_Gsf_v
 
                // ======================= Triggers for Tag ================================  
- //		if(leg5Filter == "hltEle27noerWPLooseGsfTrackIsoFilter") ControlFilterLeg = leg5Filter;
-//		if(leg6Filter == "hltEle27WPTightGsfTrackIsoFilter") ControlFilterLeg = leg6Filter;           
-//		if((leg1Filter == "hltEle23WPLooseGsfTrackIsoFilter") || (leg2Filter == "hltEle23WPLooseGsfTrackIsoFilter") || (leg3Filter == "hltEle23WPLooseGsfTrackIsoFilter")|| (leg4Filter == "hltEle23WPLooseGsfTrackIsoFilter")|| (leg7Filter == "hltEle23WPLooseGsfTrackIsoFilter")) ControlFilterLeg = leg7Filter;  
          
                ControlFilterLeg = "hltEle27WPTightGsfTrackIsoFilter"; 
   
                passControlLeg1   = passFilter(obj,ControlFilterLeg);
-         //    passControlLeg2   = passFilter(obj,ControlFilterLeg2);
              
              passProbeLeg1     = passFilter(obj,leg1Filter);
              passProbeLeg2     = passFilter(obj,leg2Filter);
@@ -696,9 +752,6 @@ else if(fabs(etas) > 1.479 && fabs(etas) < 2.5) {
              passProbeLeg14     = passFilter(obj,leg14Filter);
              passProbeLeg15     = passFilter(obj,leg15Filter);
 
-//if(passProbeLeg15 == 1) {
-//cout << "passProbeLeg15 = " << passProbeLeg15 << endl;
-//}
              if  (passProbeLeg1){
              passLeg1Obj.push_back(obj);
                 }
@@ -761,12 +814,10 @@ else if(fabs(etas) > 1.479 && fabs(etas) < 2.5) {
         }
 
                 passKinEle = (((abs(etaf) >= 0 && abs(etaf) <= 1.4442) || (abs(etaf) >= 1.5660 && abs(etaf) <= 2.5)) && ptf > 30);
- //                         passKinEle = ((abs(etaf) >= 0 && abs(etaf) <= 2.5) && ptf > 30); 
 
 
 	 TagTightIdSTD		= patUtils::passId(electronVidTightId, myEvent, selLeptons[first].el);
 	 ProbeTightIdSTD	= patUtils::passId(electronVidTightId, myEvent, selLeptons[second].el);
-//         ProbeTightIdSTD        = patUtils::passId(electronVidMediumId, myEvent, selLeptons[second].el);
        
 	 bool passTagdRCut(false);
 
@@ -776,7 +827,6 @@ else if(fabs(etas) > 1.479 && fabs(etas) < 2.5) {
          passTagdRCut = true;}
 
          if(passKinEle && TagTightIdSTD && passTagdRCut) TagEle = true;
-//        if(passKinEle && TagTightIdSTD && passTagdRCut && TagISO) TagEle = true;     
 
          if(!TagEle)  continue;
 	tagPT = ptf;
@@ -794,11 +844,13 @@ else if(fabs(etas) > 1.479 && fabs(etas) < 2.5) {
 	 TLorentzVector lep1(selLeptons[first].px(),selLeptons[first].py(),selLeptons[first].pz(),selLeptons[first].energy());
 	 TLorentzVector lep2(selLeptons[second].px(),selLeptons[second].py(),selLeptons[second].pz(),selLeptons[second].energy());  
          double mass = (lep1+lep2).M();
+         ZMass = mass;
          ZPick = mass > 60 && mass < 120;
  	 if(!ZPick)  continue;
 
 totalProbePT = pts;
 totalProbeEta = etas;
+totalProbePhi = phis;
 //count_probe++;
 
 //cout  << "Probe PT   = " << pts << "  " << "Probe Eta  = " << etas << endl;
@@ -892,85 +944,101 @@ totalProbeEta = etas;
 //	count_passprobeleg1++;
 	passProbePTLeg1 = pts;
 	passProbeEtaLeg1 = etas;
+        passProbePhiLeg1 = phis;
           }
            	if(passleg2dRCut){
 	passProbePTLeg2 = pts;
 	passProbeEtaLeg2 = etas;
+        passProbePhiLeg2 = phis;
              }
 
           	 if(passleg3dRCut){
         passProbePTLeg3 = pts;
         passProbeEtaLeg3 = etas;
+        passProbePhiLeg3 = phis;
                                         }
 
            	if(passleg4dRCut){
         passProbePTLeg4 = pts;
         passProbeEtaLeg4 = etas;
+        passProbePhiLeg4 = phis;
                                         }
 
                 if(passleg5dRCut){
   //      count_passprobeleg1++;
         passProbePTLeg5 = pts;
         passProbeEtaLeg5 = etas;
+        passProbePhiLeg5 = phis;
                                         }
 
                 if(passleg6dRCut){
         passProbePTLeg6 = pts;
         passProbeEtaLeg6 = etas;
+        passProbePhiLeg6 = phis;
    //     count_passprobeleg2++;
                                         }
 
                 if(passleg7dRCut){
         passProbePTLeg7 = pts;
         passProbeEtaLeg7 = etas;
+        passProbePhiLeg7 = phis;
  //       count_passprobeleg3++;
                                         }
 
                 if(passleg8dRCut){
         passProbePTLeg8 = pts;
         passProbeEtaLeg8 = etas;
+        passProbePhiLeg8 = phis;
                                                 }
  
     
                 if(passleg9dRCut){
         passProbePTLeg9 = pts;
         passProbeEtaLeg9 = etas;
+        passProbePhiLeg9 = phis;
                                                 }
 
                 if(passleg10dRCut){
         passProbePTLeg10 = pts;
         passProbeEtaLeg10 = etas;
+        passProbePhiLeg10 = phis;
                                                 }
                                            
 
                 if(passleg11dRCut){
         passProbePTLeg11 = pts;
         passProbeEtaLeg11 = etas;
+        passProbePhiLeg11 = phis;
                                                 }
 
                 if(passleg12dRCut){
         passProbePTLeg12 = pts;
         passProbeEtaLeg12 = etas;
+        passProbePhiLeg12 = phis;
                                                 }
 
                 if(passleg11dRCut || passleg12dRCut) {
         passProbePTLeg13 = pts;
         passProbeEtaLeg13 = etas;
+        passProbePhiLeg13 = phis;
                                                 }
 
                 if(passleg14dRCut){
         passProbePTLeg14 = pts;
         passProbeEtaLeg14 = etas;
+        passProbePhiLeg14 = phis;
                                                 }
 
                 if(passleg12dRCut || passleg14dRCut) {
         passProbePTLeg15 = pts;
         passProbeEtaLeg15 = etas;
+        passProbePhiLeg15 = phis;
                                                 }
 
                 if(passleg15dRCut) {
         passProbePTLeg16 = pts;
         passProbeEtaLeg16 = etas;
+        passProbePhiLeg16 = phis;
                                                 }
 
 //================== L1 Trigger Efficiency
