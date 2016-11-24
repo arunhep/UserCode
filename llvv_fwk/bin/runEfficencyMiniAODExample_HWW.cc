@@ -680,6 +680,9 @@ double rho = 0.;
          double pts  = selLeptons[second].pt();
          double phif = selLeptons[first].phi();
          double phis = selLeptons[second].phi();
+         double etafSC = selLeptons[first].el.superCluster()->eta();
+         double etasSC = selLeptons[second].el.superCluster()->eta();
+
 
 	 double ecalPFIsof = selLeptons[first].el.ecalPFClusterIso();	
 	 double hcalPFIsof = selLeptons[first].el.hcalPFClusterIso();	
@@ -693,16 +696,35 @@ double rho = 0.;
          double dphiin = selLeptons[second].el.deltaPhiSuperClusterTrackAtVtx();
          double chi2 = selLeptons[second].el.gsfTrack()->normalizedChi2();        
 
+         double d0 = selLeptons[second].el.gsfTrack()->dxy(vtx[0].position());
+         double dz = selLeptons[second].el.gsfTrack()->dz(vtx[0].position());
+
+         double d0f = selLeptons[first].el.gsfTrack()->dxy(vtx[0].position());
+         double dzf = selLeptons[first].el.gsfTrack()->dz(vtx[0].position());
+
+
         //cout << "detain seed = " << selLeptons[second].el.deltaEtaSeedClusterTrackAtCalo() << endl;
         //cout <<" mising hits = " << selLeptons[second].el.gsfTrack()->hitPattern().numberOfHits(reco::HitPattern::MISSING_INNER_HITS) << endl;
-if(fabs(etas) <= 1.479) {
+if(fabs(etasSC) <= 1.479) {
 //         ProbeISO = ((ecalPFIsos-rho*0.165)/pts) < 0.160 && ((hcalPFIsos-rho*0.060)/pts) < 0.120 && (trackIsos/pts) < 0.08 && abs(detaseeds) < 0.004 && misshit < 1 && abs(dphiin) < 0.020;
-         ProbeISO = ((ecalPFIsos-rho*0.165)/pts) < 0.160 && ((hcalPFIsos-rho*0.060)/pts) < 0.120 && (trackIsos/pts) < 0.08 && abs(detaseeds) < 0.004 && abs(dphiin) < 0.020;         
+ //        ProbeISO = ((ecalPFIsos-rho*0.165)/pts) < 0.160 && ((hcalPFIsos-rho*0.060)/pts) < 0.120 && (trackIsos/pts) < 0.08 && abs(detaseeds) < 0.004 && abs(dphiin) < 0.020;        
+ ProbeISO = abs(d0) < 0.05 && abs(dz) < 0.10;
+ 
 }
-else if(fabs(etas) > 1.479 && fabs(etas) < 2.5) {
+else if(fabs(etasSC) > 1.479 && fabs(etasSC) < 2.5) {
  //        ProbeISO = ((ecalPFIsos-rho*0.132)/pts) < 0.120 && ((hcalPFIsos-rho*0.131)/pts) < 0.120 && (trackIsos/pts) < 0.08 && misshit < 1 && abs(chi2) < 3;
-          ProbeISO = ((ecalPFIsos-rho*0.132)/pts) < 0.120 && ((hcalPFIsos-rho*0.131)/pts) < 0.120 && (trackIsos/pts) < 0.08 && abs(chi2) < 3;
+ //         ProbeISO = ((ecalPFIsos-rho*0.132)/pts) < 0.120 && ((hcalPFIsos-rho*0.131)/pts) < 0.120 && (trackIsos/pts) < 0.08 && abs(chi2) < 3;
+  ProbeISO = abs(d0) < 0.10 && abs(dz) < 0.20;         
 }
+
+if(fabs(etafSC) <= 1.479) {
+TagISO = abs(d0f) < 0.05 && abs(dzf) < 0.10;
+}
+else if(fabs(etafSC) > 1.479 && fabs(etafSC) < 2.5) {
+TagISO = abs(d0f) < 0.10 && abs(dzf) < 0.20;
+}
+
+
 
 //	 TagISO = ecalPFIsof < 0.45 && hcalPFIsof < 0.25 && trackIsof < 0.2;
 //	 ProbeISO = ecalPFIsos < 0.45 && hcalPFIsos < 0.25 && trackIsos < 0.2;
@@ -813,7 +835,7 @@ else if(fabs(etas) > 1.479 && fabs(etas) < 2.5) {
                 }
         }
 
-                passKinEle = (((abs(etaf) >= 0 && abs(etaf) <= 1.4442) || (abs(etaf) >= 1.5660 && abs(etaf) <= 2.5)) && ptf > 30);
+                passKinEle = (((abs(etaf) >= 0 && abs(etaf) <= 1.4442) || (abs(etaf) >= 1.5660 && abs(etaf) <= 2.5)) && ptf > 35);
 
 
 	 TagTightIdSTD		= patUtils::passId(electronVidTightId, myEvent, selLeptons[first].el);
@@ -826,7 +848,7 @@ else if(fabs(etas) > 1.479 && fabs(etas) < 2.5) {
          if (dRTag < 0.1) {
          passTagdRCut = true;}
 
-         if(passKinEle && TagTightIdSTD && passTagdRCut) TagEle = true;
+         if(passKinEle && TagTightIdSTD && passTagdRCut && TagISO) TagEle = true;
 
          if(!TagEle)  continue;
 	tagPT = ptf;
