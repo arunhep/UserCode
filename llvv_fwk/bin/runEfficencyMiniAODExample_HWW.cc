@@ -705,22 +705,22 @@ double rho = 0.;
 
         //cout << "detain seed = " << selLeptons[second].el.deltaEtaSeedClusterTrackAtCalo() << endl;
         //cout <<" mising hits = " << selLeptons[second].el.gsfTrack()->hitPattern().numberOfHits(reco::HitPattern::MISSING_INNER_HITS) << endl;
-if(fabs(etasSC) <= 1.479) {
+if(abs(etasSC) <= 1.479) {
 //         ProbeISO = ((ecalPFIsos-rho*0.165)/pts) < 0.160 && ((hcalPFIsos-rho*0.060)/pts) < 0.120 && (trackIsos/pts) < 0.08 && abs(detaseeds) < 0.004 && misshit < 1 && abs(dphiin) < 0.020;
  //        ProbeISO = ((ecalPFIsos-rho*0.165)/pts) < 0.160 && ((hcalPFIsos-rho*0.060)/pts) < 0.120 && (trackIsos/pts) < 0.08 && abs(detaseeds) < 0.004 && abs(dphiin) < 0.020;        
  ProbeISO = abs(d0) < 0.05 && abs(dz) < 0.10;
  
 }
-else if(fabs(etasSC) > 1.479 && fabs(etasSC) < 2.5) {
+else if(abs(etasSC) > 1.479 && abs(etasSC) < 2.5) {
  //        ProbeISO = ((ecalPFIsos-rho*0.132)/pts) < 0.120 && ((hcalPFIsos-rho*0.131)/pts) < 0.120 && (trackIsos/pts) < 0.08 && misshit < 1 && abs(chi2) < 3;
  //         ProbeISO = ((ecalPFIsos-rho*0.132)/pts) < 0.120 && ((hcalPFIsos-rho*0.131)/pts) < 0.120 && (trackIsos/pts) < 0.08 && abs(chi2) < 3;
   ProbeISO = abs(d0) < 0.10 && abs(dz) < 0.20;         
 }
 
-if(fabs(etafSC) <= 1.479) {
+if(abs(etafSC) <= 1.479) {
 TagISO = abs(d0f) < 0.05 && abs(dzf) < 0.10;
 }
-else if(fabs(etafSC) > 1.479 && fabs(etafSC) < 2.5) {
+else if(abs(etafSC) > 1.479 && abs(etafSC) < 2.5) {
 TagISO = abs(d0f) < 0.10 && abs(dzf) < 0.20;
 }
 
